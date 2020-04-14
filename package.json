@@ -1,6 +1,6 @@
 {
-  "name": "though-tank-backlink-js",
-  "version": "1.0.0",
+  "name": "thought-tank-backlink-js",
+  "version": "1.1.0",
   "description": "Create backlink data structure for thought tank",
   "main": "index.js",
   "scripts": {
