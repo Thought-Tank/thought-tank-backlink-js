@@ -36,10 +36,13 @@ function readFilesSync(dir) {
 
             var links = markdownLinkExtractor(markdown);
             links.forEach(function (link) {
-                var singleEntry = {};
                 //TODO clean an validate to
-                singleEntry = { "to": link["url"], "from": name, text: link["text"], link: link["url"] };
-                files.push(singleEntry);
+                var regRes = link["url"].match(/^(\/)?(notes\/)?(\d{16})[-\w]*/);
+                if (regRes) {
+                    var singleEntry = {};
+                    singleEntry = { "to": regRes[3], "from": name, text: link["text"], link: link["url"] };
+                    files.push(singleEntry);
+                }
             })
         };
     });
@@ -48,10 +51,20 @@ function readFilesSync(dir) {
 }
 
 
-const links = readFilesSync('../one-click-netlify-ThoughtTank/site/content/notes/')
+const links = readFilesSync('./site/content/notes/')
 
 var grouped = _.mapValues(_.groupBy(links, 'to'),
     clist => clist.map(link => _.omit(link, 'to')));
 
 
-console.log(grouped);
+
+const jsonString = JSON.stringify(grouped)
+fs.writeFile('./site/data/backlinks.json', jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('Successfully wrote file')
+    }
+})
+
+//console.log(grouped);
