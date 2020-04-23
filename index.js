@@ -12,8 +12,7 @@ var markdownLinkExtractor = function (markdown) {
     var renderer = new marked.Renderer();
 
     renderer.link = function (href, title, text) {
-        //        links.push(href);
-        links.push({ "text": text, "url": href });
+        links.push({ "text": text, "href": href , "title": title});
     };
 
     marked(markdown, { renderer: renderer });
@@ -36,13 +35,8 @@ function readFilesSync(dir) {
 
             var links = markdownLinkExtractor(markdown);
             links.forEach(function (link) {
-                //TODO clean an validate to
-                var regRes = link["url"].match(/^(\/)?(notes\/)?(\d{16})[-\w]*/);
-                if (regRes) {
-                    var singleEntry = {};
-                    singleEntry = { "to": regRes[3], "from": name, text: link["text"], link: link["url"] };
+                    var singleEntry = { to:  link["href"] , from: name, text: link["text"], title: link["title"] };
                     files.push(singleEntry);
-                }
             })
         };
     });
