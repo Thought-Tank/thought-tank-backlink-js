@@ -9,7 +9,7 @@
   "author": "Christian Lasarczyk <christian@lasarczyk.de>",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "marked": "^0.8.2"
   }
 }
