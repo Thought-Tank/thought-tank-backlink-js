@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.15",
-    "marked": "^0.8.2"
+    "marked": "^4.0.10"
   }
 }
